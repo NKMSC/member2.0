@@ -1,0 +1,210 @@
+{% extends "base.html"%}
+
+{%block script%}
+<script type="text/javascript" charset="gb2312" src="http://ip.qq.com/js/geo.js"></script>
+<script type="text/javascript" defer>
+
+    function err(statement,errid) {
+        document.getElementById(errid).innerHTML = statement;
+    }
+
+    function rmv_err(id) {
+        document.getElementById(id+"_err").innerHTML = '';
+    };
+
+    function check(i) {
+        var reg;
+        var err_msg = '';
+        var err_id = '';
+        switch (i.name) {
+            case 'name':
+                reg = /^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]){2,4}$/;
+                err_msg = '输入你的中文姓名！';
+                err_id = "name_err";
+                break;
+            case 'studentId':
+                reg = /^\d{7,15}$/;
+                err_msg = '请输入正确的学号！(7-15数字)';
+                err_id = "studentId_err";
+                break;
+            case 'phone':
+                reg = /^1[3458]{1}\d{9}$/;
+                err_msg = '请输入正确的手机号！(11位数字)';
+                err_id = "phone_err";
+                break;
+            case 'email':
+                reg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                err_msg = '请输入正确的邮箱！';
+                err_id = "email_err";
+                break;
+            default:
+                return true;
+        }
+        if (reg.test(i.value)) {
+            rmv_err(i.name);
+            return true;
+        } else {
+            err(err_msg,err_id);
+            return false;
+        }
+    }
+    function checkform(f) {
+        var i = f.getElementsByTagName("input");
+        for (var k = 0 ; k < i.length; ++k) {
+            if (!check(i[k]))
+                return false;
+        };
+        return true;
+    };
+</script>       
+    {%endblock%}
+
+    {% block body %}
+
+    {% if errors %}
+<ul>
+    {% for error in errors %}
+    <li>{{ error }}</li>
+    {% endfor %}
+</ul>
+    {% endif %}
+
+{%if notifications%}
+<ul>
+    {% for notification in notifications %}
+    <li>{{ notification }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+        <div class="form col-md-10 col-md-offset-1" style="margin-top:40px;" id="mainbody">
+            <form class="form-horizontal" onsubmit="return checkform(this);" action="/freshReg_result/" method="post">
+                <fieldset>
+                    <legend>个人信息</legend>
+                   
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">邮箱*</label>
+                        <div class="col-md-9">
+                            <input type="email" onblur="check(this)" name="email" class="form-control" required="required" value="{{email}}">
+                            <p id="email_err" style="color:red"></p>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">姓名*</label>
+                        <div class="col-md-9">
+                            <input type="text" onblur="check(this)" name="name" class="form-control" required="required" value="{{name}}">
+                            <p id="name_err" style="color:red"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">学号*</label>
+                        <div class="col-md-9">
+                            <input type="number" onblur="check(this)" name="studentId" class="form-control" required="required" value="{{studentId}}">
+                            <p id="studentId_err" style="color:red"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">电话*</label>
+                        <div class="col-md-9">
+                            <input type="number" onblur="check(this)" name="phone" class="form-control" required="required" value="{{phone}}">
+                            <p id="phone_err" style="color:red"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">年级*</label>
+                        <div class="col-md-9">
+                            <select name="grade" class="form-control" required="required">
+                                <option value="大一" selected="true">大一</option>
+                                <option value="大二">大二</option>
+                                <option value="大三">大三</option>
+                                <option value="大四">大四</option>
+                                <option value="研一">研一</option>
+                                <option value="研二">研二</option>
+                                <option value="研三">研三</option>
+                            </select>
+                            <p id="grade_err" style="color:red"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" >校区*</label>
+                        <div class="col-md-9">
+                            <select name="campus" class="form-control" required="required">
+                                <option value="津南校区" selected="true">津南校区</option>
+                                <option value="八里台">八里台</option>
+                                <option value="泰达">泰达</option>
+
+                            </select>
+                            <p id="campus_err" style="color:red"></p>
+                        </div>
+                    </div>
+                      <div class="form-group">
+                        <label class="col-md-2 control-label" >学院*</label>
+                        <div class="col-md-9">
+                            <select name="major" class="form-control" required="required">
+                                <option value="计算机与控制工程学院">计算机与控制工程</option>
+                                <option value="软件学院">软件学院</option>
+                                <option value="电子信息与光学工程学院">电子信息与光学工程</option>
+                                <option value="数学学院">数学学院</option>
+                                <option value="物理学院">物理学院</option>
+                                <option value="商学院">商学院</option>
+                                <option value="经济学院">经济学院</option>
+                                <option value="化学学院">化学学院</option>
+                                <option value="生命科学学院">生命科学学院</option>
+                                <option value="环境科学与工程学院">环境科学与工程</option>
+                                <option value="文学院">文学院</option>
+                                <option value="法学院">法学院</option>
+                                <option value="历史学院">历史学院</option>
+                                <option value="哲学院">哲学院</option>
+                                <option value="医学院">医学院</option>
+                                <option value="药学院">药学院</option>
+                                <option value="周恩来政府管理学院">周恩来政府管理</option>
+                                <option value="马克思主义教育学院">马克思主义教育</option>
+                                <option value="旅游与服务学院">旅游与服务学院</option>
+                                <option value="外国语学院">外国语学院</option>
+                                <option value="汉语言文化学院">汉语言文化学院</option>
+                                <option value="金融学院">金融学院</option>
+                                <option value="泰达学院">泰达学院</option>
+                                <option value="材料学院">材料学院</option>
+                                <option value="其它">其它学院</option>
+                            </select>
+                            <p id="major_err" style="color:red"></p>
+                        </div>
+                    </div>
+                    
+                </fieldset>
+
+                <fieldset>
+                    <legend>填报志愿</legend>
+                  <div class="form-group">
+                        <label class="col-md-2 control-label" >第一志愿*</label>
+                        <div class="col-md-9">
+                            <select  name="aspiration1" class="form-control" required="required">
+                                <option value="技术部">技术部</option>
+                                <option value="新闻媒体部">新闻媒体部</option>
+                                <option value="运营部">运营部</option>
+                            </select>
+                            <p id="aspiraton1_err" style="color:red"></p>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="col-md-2 control-label" >第二志愿</label>
+                        <div class="col-md-9">
+                            <select  name="aspiration2" class="form-control" >
+                                <option value="技术部">技术部</option>
+                                <option value="新闻媒体部">新闻媒体部</option>
+                                <option value="运营部">运营部</option>
+                            </select>
+                            <p id="aspiration2_err" style="color:red"></p>
+                        </div>
+                    </div>                   
+                    
+                </fieldset>
+                
+            <input type="submit" value="确认注册" class="col-md-offset-1 btn btn-lg btn-primary">
+
+        </form>
+    </div>
+
+{%endblock%}

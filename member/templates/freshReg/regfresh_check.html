@@ -1,0 +1,72 @@
+{% extends "base.html"%}
+
+{% block script%}
+<script type="text/javascript" charset="gb2312" src="http://ip.qq.com/js/geo.js"></script>
+<script type="text/javascript" defer>
+
+    function err(statement, errid) {
+        document.getElementById(errid).innerHTML = statement;
+    }
+
+    function rmv_err(id) {
+        document.getElementById(id + "_err").innerHTML = '';
+    };
+
+    function check(i) {
+        var reg;
+        var err_msg = '';
+        var err_id = '';
+        switch (i.name) {
+            
+            case 'studentid':
+                reg = /^\d{7,15}$/;
+                err_msg = 'Please enter correct student ID number! (7-15 digits)';
+                err_id = "studentid_err";
+                break;
+            default:
+                return true;
+        }
+        if (reg.test(i.value)) {
+            rmv_err(i.name);
+            return true;
+        } else {
+            err(err_msg, err_id);
+            return false;
+        }
+    }
+    function checkform(f) {
+        var i = f.getElementsByTagName("input");
+        for (var k = 0 ; k < i.length; ++k) {
+            if (!check(i[k]))
+                return false;
+        };
+        return true;
+    };
+</script>
+{%endblock%}
+
+
+
+{% block body%}
+{%if notifications%}
+<ul>
+    {% for notification in notifications %}
+    <li>{{ notification }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="form col-md-10 col-md-offset-1" style="margin-top:40px;" id="mainbody">
+    <form class="form-horizontal" onsubmit="return checkform(this);" action="/freshReg_request_check_result/" style="padding-left: 5%; padding-right:5%" method="post">
+        <div class="form-group">
+            <label class="col-md-2 control-label">Enter student ID number to check your information and current status:</label>
+            <div class="col-md-9">
+                <input type="studentid" onblur="check(this)" name="studentid" class="form-control" required="required" value="{{studentid}}">
+                <p id="studentid_err" style="color:red"></p>
+            </div>
+        </div>
+
+        <input type="submit" value="CHECK" class="col-md-offset-1 btn btn-lg btn-primary">
+    </form>
+ </div>
+    {%endblock%}

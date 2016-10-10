@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head lang="zh-CN">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <title>
+	    南开编程之美中奖确认
+	    </title>
+    </head>
+    <body style="text-align:center;">
+	<form >
+        <br>
+        <br>
+        <br>
+        <strong >中奖通知</strong>
+		<br>
+		<p>中奖等级：
+            {% ifequal level "special" %}
+                <strong>恭喜你抽中 特等奖（玩偶一个）！！</strong>
+            {% endifequal %}
+            {% ifequal level "first" %}
+                <strong>恭喜你抽中 一等奖（小音箱或者32gU盘任选）！！</strong>
+            {% endifequal %}
+            {% ifequal level "second" %}
+                <strong>恭喜你抽中 二等奖（水杯一个）！！</strong></p>
+            {% endifequal %}
+            {% ifequal level "third" %}
+                <strong>恭喜你抽中 三等奖（黑色笔记本或USB灯任选）！！</strong>
+            {% endifequal %}
+            {% ifequal level "fourth" %}
+                <strong>恭喜你抽中 四等奖（白色笔记本一个）！！</strong>
+            {% endifequal %}
+            {% ifequal level "fifth" %} 
+                <strong>恭喜你抽中 纪念奖（记事本，卡套或者手摇电筒任选）！！</strong>
+            {% endifequal %}
+        </p>
+	</form>
+		<form method="post" action="/beautyOfCoding/lottery_confirmed" >
+		<input type="text" hidden="hidden" name="micro_id"  value = "{{micro_id}}">
+        <input class=" form-control " class="col-md-4" type ="phone_number" name ="phone_number" placeholder="输入手机号码">
+        <button type="submit" class="col-md-4 btn btn-default">领取奖品</button>
+        </form>
+        <form>
+		<p>请于<strong>上方输入框</strong> 留取您的电话号码便于我们确认送达奖品 <strong>注意：不留联系方式，默认放弃中奖，我们将不予记录</strong></p>
+        {% if no_phoneNumber %}
+                <strong>留取联系方式无效</strong>
+        {% endif %}
+        </form>
+		<p>南开微软学生俱乐部</p>
+        <div class="" >
+            <img src="/statics/image/micro_logo/nkumstc_QR.jpg" width="100" height="100">
+            <span class="h1">扫码关注南微软微信公众号nkumstc，获取下线领奖时间及丰富科技资讯</span>
+        </div>
+</body>
+</html>
+

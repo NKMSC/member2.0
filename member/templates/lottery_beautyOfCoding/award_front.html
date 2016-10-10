@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head lang="zh-CN">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <title>
+	    南微软抽奖活动
+	    </title>
+    </head>
+    <body style="text-align:center;">
+    
+        <br>
+        <br>
+        <br>
+        <p>
+           {{name}}同学你好：
+           <br>   
+            &nbsp&nbsp&nbsp&nbsp您看到这个页面是因为报名了编程之美活动，并且是南开大学的学生。
+            为了鼓励我校学生积极参加编程活动，南微软俱乐部向您提供一次<strong>免费的抽奖活动</strong>，活动真实有效
+            <br>
+            &nbsp&nbsp&nbsp&nbsp
+            <strong>注意</strong>
+            <br>
+            点击即完成抽奖环节，跳转页面后请勿刷新页面，否则即认为刷奖，取消抽奖资格
+            <br>
+            windows Phone 用户暂因为不明bug 难以使用，请将链接在电脑浏览器上打开~
+       </p>
+		<form method="post" action="/beautyOfCoding/getLottery" >
+        <input class=" form-control " hidden="hidden" class="col-md-4" type ="text" name = "micro_id" value = "{{micro_id}}" placeholder="报名id">
+        <button type="submit" class="col-md-4 btn btn-default">点击抽奖</button>
+        </form>
+        <form>
+        </form>
+		<p>南开微软学生俱乐部</p>
+        <div class="" >
+            <img src="/statics/image/micro_logo/nkumstc_QR.jpg" width="100" height="100">
+            <span class="h1">扫码关注南微软微信公众号nkumstc，获取下线领奖时间及丰富科技资讯</span>
+        </div>
+</body>
+</html>
+

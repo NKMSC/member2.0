@@ -1,0 +1,84 @@
+{% extends "mail_base.html" %}
+
+{%block css%}
+<style type="text/css">
+    #mail_content p, td {
+        font-size: 2em;
+    }
+
+    table, td, th {
+        border: 1px solid;
+    }
+
+    table {
+        width: 100%;
+        height: 50px;
+        border-collapse: collapse;
+    }
+
+    td {
+        text-align: center;
+    }
+</style>
+{%endblock%}
+
+
+{%block mail %}
+
+<div id="mail_content" class="col-md-6">
+    <br>
+    <br>
+    <p class="col-md-offset-3">
+        亲爱的{{fm.name}}同学你好：<br>
+        感谢关注南开大学微软俱乐部！<br>
+        {% if written_test %}
+        因为你的志愿中有<strong>技术部</strong>，所以需要参加<strong>笔试</strong>。我们的笔试地点为5b304，时间为9月22日周四晚七点.若您看到本消息，请<strong>回复任意内容至本邮箱</strong>。<br>
+        {% endif %}
+        注册首页的STATUS页面相关信息已经更新。
+        由于邮箱系统的原因，这可能是您第二次收到这封邮件，对此带来的困扰我们深表歉意。
+        <br>
+        下表是你的注册信息:
+        <table>
+            <tr>
+                <td></td>
+                <td>你的信息</td>
+            </tr>
+            <tr>
+                <td>学号</td>
+                <td>{{fm.student_id}}</td>
+            </tr>
+            <tr>
+                <td>电话</td>
+                <td>{{fm.phonenumber}}</td>
+            </tr>
+            <tr>
+                <td>年级</td>
+                <td>{{fm.grade}}</td>
+            </tr>
+            <tr>
+                <td>所在校区</td>
+                <td>{{fm.campus}}</td>
+            </tr>
+            <tr>
+                <td>专业</td>
+                <td>{{fm.major}}</td>
+            </tr>
+            <tr>
+                <td>第一志愿</td>
+                <td>{{fm.aspiration1}}</td>
+            </tr>
+            <tr>
+                <td>第二志愿</td>
+                <td>{{fm.aspiration2}}</td>
+            </tr>
+        </table>
+        <br><br>
+        <hr />
+        <br><br>
+    <p><small>扫码关注微信公众号nkumstc</small></p>
+    <img src="http://nkumstcer.applinzi.com/statics/image/other/QR.jpg">
+
+
+</div>
+
+{%endblock%}

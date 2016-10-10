@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+
+{%block css%}
+        <style type="text/css">
+
+            #nav_bar{
+                        text-align: center;
+            
+                    }
+            #hint{
+                text-align: center;
+                margin-left: 10%;
+                margin-right: 10%;
+                margin-top: 1%
+            }
+            .mynav{
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+</style>
+{%endblock %}
+
+{#导航栏#}
+{%block nav%}
+	<div id="nav_bar">
+        <ul class="nav row nav-pills  col-md-offset-1" >
+             <li class="mynav col-md-1 {%block main%}{%endblock%}"><a href="/freshShow/">首页</a></li> 
+            <li class="mynav col-md-1 {%block test%}{%endblock%}"><a href="/freshReg_entryWrittenPerformance/">笔试成绩</a></li> 
+            <li class="mynav col-md-1 {%block interview%}{%endblock%}"><a href="/freshInterviewQualification/">面试资格</a></li> 
+            <li class="mynav col-md-1 {%block finalresult%}{%endblock%}"><a href="/finalResult/">最终结果</a></li>
+            <li class="mynav col-md-1 {%block mailrecord%}{%endblock%}"><a href="/manage/mailrecord/">邮件记录</a></li>
+            <li class="mynav col-md-1 {%block SMSrecord%}{%endblock%}"><a href="/manage/SMSrecord/">短信记录</a></li>
+           
+            <!--搜索-->                  
+                <form class="form-inline " method="post" action="/freshSearch/" >
+                    <input class= "form-control"name ="searchID" type="text" placeholder="输入学号搜索" >
+                <input  class ="btn btn-success " type="submit" value="搜索" >
+                </form>
+               
+             
+        </ul>            
+    </div>
+{%endblock%}
+
+{%block body%}
+<div id="hint" class="alert alert-success" role="alert">当前共{{total_count}}人注册,{{writen_count}}人参加笔试,{{interview_count}}人参加面试</div>
+
+{%endblock%}

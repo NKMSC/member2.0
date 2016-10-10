@@ -1,0 +1,16 @@
+{%extends "mail_base.html"%}
+
+{%block mail%}
+{% ifequal freshMember.memberqualifiction 1%}
+亲爱的{{freshMember.name}}同学你好：
+	恭喜你成为微软俱乐部{{freshMember.finalaspiration}}的一员。
+    点<a href={{weburl}}>这里</a>进行登录并完善信息。
+    账号为你的注册邮箱，密码为你的学号
+{%else%}
+亲爱的{{freshMember.name}}同学你好：
+	很抱歉你没有成为我们的一员。
+
+{%endifequal%}
+
+
+{%endblock%}

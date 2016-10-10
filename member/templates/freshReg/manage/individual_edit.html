@@ -1,0 +1,68 @@
+{%extends "freshReg/manage/display_allInfo.html"%}
+{%block action%}
+/individual_edit/
+{%endblock%}
+
+{%block content%}
+{%for freshMember in freshMemberList %}
+  <tr>
+    <td>{{freshMember.register_year}}</td>
+    <td>{{freshMember.student_id}}</td>
+    <td>{{freshMember.name}}</td>
+    <td>{{freshMember.grade}}</td>
+    <td>{{freshMember.major}}</td>
+    <td>{{freshMember.mailbox}}</td>
+    <td>{{freshMember.aspiration1}}</td>
+    <td>{{freshMember.aspiration2}}</td>
+    <td>
+      <div class="input-group input-group-sm">
+        <input type="number" class="form-control" name="{{freshMember.id}}" value="{{freshMember.writtenscore}}">
+      </div>      
+    </td>
+    <td>     
+        <input  type="radio" name="{{freshMember.id}}" id="not_qualified_{{freshMember.id}}"
+        {% ifequal freshMember.interviewqualification 0 %}
+        checked="true"
+        {% endifequal %}
+         value="0">
+        <label for="not_qualified_{{freshMember.id}}">无资格&nbsp&nbsp&nbsp</label>
+        <input   type="radio" name="{{freshMember.id}}"  id="qualified_{{freshMember.id}}"
+        {% ifequal freshMember.interviewqualification 1 %}
+        checked="true"
+        {% endifequal %}
+          value="1" >
+        <label for="qualified_{{freshMember.id}}">有资格</label>      
+    </td>    
+    <td>
+     <select class="form-control " name="{{freshMember.id}}" >
+       <option value="淘汰"
+       {%ifequal freshMember.memberqualifiction 0 %}
+       selected="selected"
+       {%endifequal%}>淘汰</option>
+    
+      <option value="技术部"   
+             {% ifequal freshMember.finalaspiration "技术部" %}
+               selected="selected"
+             {% endifequal %}>技术部</option>         
+      <option value="运营部"
+             {% ifequal freshMember.finalaspiration "运营部" %}
+               selected="selected"
+             {% endifequal %}>运营部</option>
+      <option value="新闻媒体部"
+             {% ifequal freshMember.finalaspiration "新闻媒体部" %}
+             selected="selected"
+             {% endifequal %}>新闻媒体部</option>
+     </select>
+    </td>
+  </tr>
+  {%empty%}
+  <p>无人注册</p>
+  {% endfor %}
+
+{%endblock%}
+
+{%block button%}
+  <input type="submit" class="col-md-3  btn btn-primary " value="提交">
+  <a href="/freshShow/" class="col-md-3 col-md-offset-1 btn btn-success ">返回</a>
+
+{%endblock%}

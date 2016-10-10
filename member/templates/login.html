@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+	<link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <title>登录</title>
+    <style type="text/css">
+        body {
+            background: url("../statics/image/other/background-strong.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: "Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu, Arial, Helvetica, sans-serif;
+            color: #1C1C1C;
+            padding: 20px 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+	<div>
+        <h1 class="text-center">南开大学微软学生俱乐部</h1>
+	</div>
+	<div class="col-md-6 col-md-offset-3" style="margin-top:6%;">
+		<form class="form"  action="/login_result/" method="post" >
+			<div class="form-group">
+				<input type="email" name="email" class="form-control input-lg" placeholder="邮箱">
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" class="form-control input-lg" placeholder="密码">
+			</div>
+			<div class="checkbox"> 
+				<label style="color: #333"> <input type="checkbox">下次自动登录</label> 
+			</div>
+			<div class="form-group">
+				<input type="submit" value="登陆" class="btn btn-primary btn-lg btn-block">
+                
+			</div>
+            <a href="/reset_password_request/" class=" text-danger col-md-offset-10">找回密码</a>
+		</form>
+	</div>
+</div>
+</body>
+</html>

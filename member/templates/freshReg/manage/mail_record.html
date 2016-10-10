@@ -1,0 +1,42 @@
+{%extends "freshReg/manage/manage_base.html"%}
+
+{%block mailrecord%}active{%endblock%}
+
+{%block body%}
+{{block.super}}
+
+<div class="col-md-9 col-md-offset-1"><table class="table table-hover">
+	<tr>
+		<th>学号</th>
+		<th>邮箱</th>
+		<th>时间</th>
+		<th>邮件摘要</th>
+		<th>状态</th>
+		<th>重发</th>
+	</tr>
+	{% for mailRecord in mailRecordList reversed%}
+	{#反向迭代，最新的记录放在开头#}
+	<tr>
+		<td>{{mailRecord.student_id}}</td>
+		<td>{{mailRecord.email}}</td>
+		<td>{{mailRecord.time|date:"Y-m-d H:i:s"}}</td>
+		<td>{{mailRecord.abstract}}</td>
+		<td>{% ifequal mailRecord.status 1%}
+		 <p class="text-success">成功</p></div>
+		
+		 {%else%}
+		 <p class="text-danger">失败</p>
+		 {%endifequal%}</td>
+		<td><a 
+			{% ifnotequal mailRecord.status 0%}
+			hidden="true"
+			{%endifnotequal%}
+			 href="/manage/resendmail?id={{mailRecord.id}}">重发</a></td>
+	</tr>
+	{%endfor%}
+</table></div>
+
+
+
+
+{%endblock%}

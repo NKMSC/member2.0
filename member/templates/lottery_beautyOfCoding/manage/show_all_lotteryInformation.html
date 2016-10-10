@@ -1,0 +1,27 @@
+{%extends "lottery_beautyOfCoding/manage/display_allInfo.html"%}
+
+{%block content%}
+
+{%for winner in lotteryWinners %}
+  <tr>
+    <td>{{winner.phone_number}}</td>
+    <td>{{winner.present_level}}</td>
+    <td>{% ifequal winner.status 1%}
+        已领奖
+        {% else %}
+        未领奖
+        {%endifequal%}
+    </td>
+    <td><a 
+      {% ifequal winner.status 1%}
+      hidden="true"
+      {%endifequal%}
+      href="../beautyOfCoding/award_confirmed?micro_id={{winner.micro_id}}">确认领奖</a>
+    </td>
+    
+  </tr>
+  {%empty%}
+  <p>暂无人中奖</p>
+  {% endfor %}
+
+{%endblock%}

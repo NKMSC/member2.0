@@ -1,0 +1,38 @@
+{%extends "freshReg/manage/manage_base.html"%}
+
+
+{%block body%}
+
+{{block.super}}
+{%block subBody%}
+{%endblock%}
+<form method="post" class=" col-md-9 col-md-offset-1 " action="{%block action%}{%endblock%}">
+<table class="table table-hover">
+	<tr>
+        <th>注册年份</th>
+		<th>姓名</th>
+		<th>学号</th>
+		<th>邮箱</th>
+		<th>电话</th>
+		<th>第一志愿</th>
+		<th>第二志愿</th>
+		{%block edit_column%}
+		{%endblock%}
+	</tr>
+	{%for freshMember in freshMemberList%}
+	<tr>
+        <td>{{freshMember.register_year}}</td>
+		<td>{{freshMember.name}}</td>
+		<td>{{freshMember.student_id}}</td>
+		<td>{{freshMember.mailbox}}</td>
+		<td>{{freshMember.phonenumber}}</td>
+		<td>{{freshMember.aspiration1}}</td>
+		<td>{{freshMember.aspiration2}}</td>
+		{%block edit_part%}
+		{%endblock%}
+	</tr>
+	{%endfor%}
+</table>
+<input type="submit" class="col-md-3  btn btn-primary " value="提交">
+</form>
+{%endblock%}

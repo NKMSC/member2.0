@@ -1,0 +1,23 @@
+{%extends "freshReg/manage/edit_base.html" %}
+{#修改笔试成绩的页面#}
+
+{%block test%}active{%endblock%}
+{%block action %}
+/freshReg_performWrittenPerformance/
+{%endblock%}
+
+{% block subBody %}
+
+<!--a class="btn btn-danger col-md-offset-1" href="/manage/sendSMSList?option=testlocationtime">发送<strong>短信</strong>通知笔试时间和地点</!--a-->
+
+<a class="btn btn-warning col-md-offset-1" href="/manage/sendEmailList?option=testlocationtime">发送邮件通知笔试时间和地点</a>
+<br>
+<br>
+{% endblock %}
+{%block edit_column%}
+<th>笔试成绩</th>
+{%endblock%}
+
+{%block edit_part%}
+<td><input type="number" class="form-control" name="{{freshMember.id}}" value="{{freshMember.writtenscore}}"></td>
+{%endblock%}

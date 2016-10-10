@@ -1,0 +1,29 @@
+{%extends "freshReg/manage/display_allInfo.html"%}
+
+{%block content%}
+
+<div id="hint" class="alert alert-success" role="alert">当前 处于纳新的 {{PERIOD}} 阶段， 进行时间为 {{PERIOD_TIME}}</div>
+{%for freshMember in freshMemberList %}
+  <tr>
+    <td>{{freshMember.register_year}}</td>
+    <td>{{freshMember.student_id}}</td>
+    <td>{{freshMember.name}}</td>
+    <td>{{freshMember.grade}}</td>
+    <td>{{freshMember.major}}</td>
+    <td>{{freshMember.mailbox}}</td>
+    <td>{{freshMember.aspiration1}}</td>
+    <td>{{freshMember.aspiration2}}</td>
+    <td>{{freshMember.writtenscore}}</td>
+    <td>{% ifequal freshMember.interviewqualification 1%}
+        有
+        {% else %}
+        无
+        {%endifequal%}
+    </td>
+    <td>{{freshMember.finalaspiration}}</td>
+  </tr>
+  {%empty%}
+  <p>无人注册</p>
+  {% endfor %}
+
+{%endblock%}

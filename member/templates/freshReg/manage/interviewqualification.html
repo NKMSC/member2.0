@@ -1,0 +1,73 @@
+{%extends "freshReg/manage/edit_base.html"%}
+
+{% comment %}
+本页面用于确认面试资格
+1、“快速选择”用于快速选择笔试成绩的前X名作为面试人员
+2、如果用户已有面试资格，则模板变量qualified应为true
+3、第一志愿不是技术部的人默认进入面试，且在本页面不显示。只有参加笔试的人在本页面显示
+4、邮件只能发送一次,需要记录是否发送成功。数据库是否需要建新表？
+
+{% endcomment %}
+{%block title %}面试资格{%endblock%}
+{%block css%}
+{{block.super}}
+
+<style type="text/css">
+
+#quick_select{
+	margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%
+}
+</style>
+
+
+{%endblock%}
+{%block interview%}active{%endblock%}
+{% block subBody %}
+<!--快速选择相应的面试人数-->
+	<form id="quick_select"class=" form-inline col-md-offset-1" action="\freshInterviewQualification_edit\" method="post">
+		<input id="quick_select_input" class="form-control" placeholder="快速显示笔试前X名" type="number" name="amount">
+		<input type="submit" class="btn btn-default" value="快速选择">
+
+		<!--a class="btn btn-danger col-md-offset-1" href="/manage/sendSMSList?option=interviewqualification">发送<strong>短信</strong>通知面试</!--a-->
+
+        <a class="btn btn-warning col-md-offset-1" href="/manage/sendEmailList?option=interviewqualification">发送邮件通知面试</a>
+
+	</form>
+	<br>
+{% endblock %}
+
+{% block action %}
+/freshInterviewQualification_result/
+{% endblock %}
+
+{%block edit_column%}
+<th>笔试成绩</th>
+<th>面试资格</th>
+{%endblock%}
+
+{%block edit_part%}
+
+<td>{{freshMember.writtenscore}}</td>
+<td>
+	<div class="radio">
+	 <input  type="radio" name="{{freshMember.id}}" id="not_qualified_{{freshMember.id}}"
+        {% ifequal freshMember.interviewqualification 0 %}
+        checked="true"
+        {% endifequal %}
+         value="0">
+        <label for="not_qualified_{{freshMember.id}}">无资格</label>
+	</div>
+	<div class="radio">
+		<input   type="radio" name="{{freshMember.id}}"  id="qualified_{{freshMember.id}}"
+        {% ifequal freshMember.interviewqualification 1 %}
+        checked="true"
+        {% endifequal %}
+          value="1" >
+        <label for="qualified_{{freshMember.id}}">有资格</label>   
+	</div>
+	
+</td>
+
+{%endblock%}

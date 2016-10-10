@@ -1,0 +1,53 @@
+{% extends "freshReg/manage/edit_base.html" %}
+{% comment %}
+本页面用于确认最终的面试结果
+
+1、只有参加面试的人才可以显示在本页面中
+2、邮件只能发送一次,需要记录是否发送成功。数据库是否需要建新表？
+3、发送成功后
+{% endcomment %}
+
+
+{% block title %}最终结果{%endblock%}
+{%block finalresult%}active{%endblock%}
+
+{% block subBody %}
+
+<!--a class="btn btn-danger " href="/manage/sendSMSList?option=finalresult">发送<strong>短信</strong>通知最终结果<!---a-->
+
+<a class="btn btn-warning col-md-offset-1" href="/manage/sendEmailList?option=finalresult">发送邮件通知最终结果</a>
+<br>
+<br>
+{% endblock %}
+
+{% block action %}
+/finalResult/
+{% endblock %}
+
+{% block edit_column %}
+	<th>最终结果</th>
+{% endblock %}
+
+{% block edit_part %}
+<td>
+	<select class="form-control" name="{{freshMember.id}}" >
+		<option value="淘汰"
+		{%ifequal freshMember.memberqualifiction 0 %}
+		selected="selected"
+		{%endifequal%}>淘汰</option>
+
+         <option value="技术部"   
+         	{% ifequal freshMember.finalaspiration "技术部" %}
+		 		selected="selected"
+		 	{% endifequal %}>技术部</option>         
+         <option value="运营部"
+         	{% ifequal freshMember.finalaspiration "运营部" %}
+		 		selected="selected"
+		 	{% endifequal %}>运营部</option>
+         <option value="新闻媒体部"
+          {% ifequal freshMember.finalaspiration "新闻媒体部" %}
+		 	selected="selected"
+		 {% endifequal %}>新闻媒体部</option>
+	</select>
+	</td>
+{% endblock %}

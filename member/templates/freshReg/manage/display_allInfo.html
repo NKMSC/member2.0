@@ -1,0 +1,34 @@
+
+{%extends "freshReg/manage/manage_base.html"%}
+{%block title%}注册管理系统{%endblock%}
+
+
+{%block main%}active{%endblock%}
+{%block body%}
+  {{block.super}}
+  <div class="col-md-10 col-md-offset-1">
+    <form  method="post" action="{%block action%}{%endblock%}">
+        <table class="table table-hover">
+          <tr>
+            <th>注册年份</th>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>年级</th>
+            <th>专业</th>
+            <th>邮箱</th>
+            <th>志愿一</th>
+            <th>志愿二</th>
+            <th>笔试成绩</th>
+            <th>面试资格</th>      
+            <th>录取部门</th>
+          </tr>
+          {%block content%}
+          {%endblock%}
+        </table>
+   {%block button%}
+   {%endblock%}
+
+    </form>
+  </div>
+  
+{%endblock%}

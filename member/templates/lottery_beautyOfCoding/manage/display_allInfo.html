@@ -1,0 +1,27 @@
+
+{%extends "lottery_beautyOfCoding/manage/manage_base.html"%}
+{%block title%}编程之美领奖管理页面{%endblock%}
+
+
+{%block main%}active{%endblock%}
+{%block body%}
+  {{block.super}}
+  <div class="col-md-10 col-md-offset-1">
+    <form  method="post" action="{%block action%}{%endblock%}">
+        <table class="table table-hover">
+          <tr>
+            <th>手机号</th>
+            <th>奖品等级</th>
+            <th>是否领奖</th>
+            <th>领取</th>
+          </tr>
+          {%block content%}
+          {%endblock%}
+        </table>
+   {%block button%}
+   {%endblock%}
+
+    </form>
+  </div>
+  
+{%endblock%}

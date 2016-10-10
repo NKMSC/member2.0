@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+
+{%block css%}
+        <style type="text/css">
+
+            #nav_bar{
+                        text-align: center;
+            
+                    }
+            #hint{
+                text-align: center;
+                margin-left: 10%;
+                margin-right: 10%;
+                margin-top: 1%
+            }
+            .mynav{
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+</style>
+{%endblock %}
+
+{#导航栏#}
+{%block nav%}
+	<div id="nav_bar">
+        <ul class="nav row nav-pills  col-md-offset-0" >
+            <form class="form-inline " >
+                <p class="nav row nav-pills  col-md-offset-0"> <strong>中奖同学名单</strong> </p>
+            </form>
+       </ul>            
+    </div>
+{%endblock%}
